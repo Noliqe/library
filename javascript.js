@@ -44,37 +44,77 @@ function clearForm () {
     checkbox = false; 
 }
 
+function uniqueId(counter){
+    let counterUniqueId = 'unique' + counter;
+    return counterUniqueId;
+}
 
+
+let counter = 0;
 function createCard() {
-    for (let i = 0; i < myLibrary.length; i++) {
+    for (let i = counter; i < myLibrary.length; i++) {
 
     let card = document.createElement('div');
     card.classList.add('cardDiv');
+    card.setAttribute("id", uniqueId(counter));
     document.body.appendChild(card);
     cardContainer.appendChild(card);
 
     let paraAuthor = document.createElement('p');
     document.body.appendChild(paraAuthor);
     card.appendChild(paraAuthor);
+    paraAuthor.setAttribute('style', 'margin: 0;');
 
     let paraTitle = document.createElement('p');
     document.body.appendChild(paraTitle);
     card.appendChild(paraTitle);
+    paraTitle.setAttribute('style', 'margin: 0;');
 
     let paraPages = document.createElement('p');
     document.body.appendChild(paraPages);
     card.appendChild(paraPages);
+    paraPages.setAttribute('style', 'margin: 0;');
 
-    let paraRead = document.createElement('button');
-    paraRead.classList.add('cardRead');
-    document.body.appendChild(paraRead);
-    card.appendChild(paraRead);
-    paraAuthor.textContent = myLibrary.map(a => 'Author: ' + a.author);
-    paraTitle.textContent = myLibrary.map(a => 'Title: ' + a.title);
-    paraPages.textContent = myLibrary.map(a => 'Pages: ' + a.pages);
-    paraRead.textContent = myLibrary.map(a => a.read);
-    spliceArray = myLibrary.splice(0)
+
+    let buttonRead = document.createElement('input');
+    document.body.appendChild(buttonRead);
+    buttonRead.classList.add('cardRead');
+    card.appendChild(buttonRead);
+    buttonRead.type = "button"
+    buttonRead.addEventListener('click', function(){
+    if (buttonRead.value === 'Read') {
+        buttonRead.value = 'Not read';
+    } else if (buttonRead.value === 'Not read') {
+        buttonRead.value = 'Read';
     }
+    });
+
+    let buttonRemove = document.createElement('input');
+    document.body.appendChild(buttonRemove);
+    buttonRemove.classList.add('cardRemove');
+    card.appendChild(buttonRemove);
+    buttonRemove.type = "button"
+    buttonRemove.value = 'Remove';
+    buttonRemove.addEventListener('click', function(){
+    passBtnId(card.id);
+    });
+
+    // returns selected array, counter +1
+    const newArr = myLibrary.slice([counter]);
+    paraAuthor.textContent = newArr.map(a => '"' + a.author + '"')
+    paraTitle.textContent = newArr.map(a => a.title);
+    paraPages.textContent = newArr.map(a => a.pages + ' pages');
+    buttonRead.value = newArr.map(a => a.read);
+
+    counter += 1;
+    }
+}
+
+function passBtnId(id) {
+    let idUnique = '#' + id;
+    document
+    .querySelectorAll(idUnique)
+    .forEach((e) => e.parentNode.removeChild(e));
 }
 
 
