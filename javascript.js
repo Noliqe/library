@@ -84,8 +84,10 @@ function createCard() {
     buttonRead.addEventListener('click', function(){
     if (buttonRead.value === 'Read') {
         buttonRead.value = 'Not read';
+        buttonRead.setAttribute('style', 'background-color: #fa6055; border: 1px solid #fa6055; color: black;');
     } else if (buttonRead.value === 'Not read') {
         buttonRead.value = 'Read';
+        buttonRead.setAttribute('style', 'background-color: #46fd35; border: 1px solid #46fd35; color: black;');
     }
     });
 
@@ -105,6 +107,12 @@ function createCard() {
     paraTitle.textContent = newArr.map(a => a.title);
     paraPages.textContent = newArr.map(a => a.pages + ' pages');
     buttonRead.value = newArr.map(a => a.read);
+    // buttonRead styling
+    if (buttonRead.value === 'Read') {
+        buttonRead.setAttribute('style', 'background-color: #46fd35; border: 1px solid #46fd35; color: black;');
+    } else if (buttonRead.value === 'Not read') {
+        buttonRead.setAttribute('style', 'background-color: #fa6055; border: 1px solid #fa6055; color: black;');
+    }
 
     counter += 1;
     }
@@ -158,9 +166,10 @@ function addBook () {
     let formPages = document.createElement('input');
     document.body.appendChild(formPages);
     form.appendChild(formPages);
-    formPages.setAttribute("type", "text");
+    formPages.setAttribute("type", "number");
     formPages.setAttribute("id", "pages");
     formPages.setAttribute("name", "pages");
+    formPages.setAttribute('pattern', '[0-9];');
     formPages.setAttribute("placeholder", "Pages");
     formPages.classList.add('popupInput');
 
