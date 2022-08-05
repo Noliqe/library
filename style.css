@@ -1,25 +1,31 @@
 @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
 
+.html {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     font-family: 'Muli', sans-serif;
     margin: 0;
     padding: 0;
+    max-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     font-size: 20px;
-    background-color: rgb(223, 223, 223);
+    background-color: rgb(31, 30, 30);
 }
 
 .header {
     width: 100vw;
-    height: 5vw;
+    height: 100px;
     margin: 0;
     position: relative;
     box-shadow: 2px 2px 2px gray;
     border-bottom: 1px solid gray;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(70, 65, 65);
     text-align: center;
 }
 
@@ -156,6 +162,7 @@ body {
     height: 300px;
     background-color: white;
     border: 2px solid white;
+    color: white;
     box-shadow: 2px 2px 2px gray;
     border-radius: 10px;
     display: grid;
@@ -165,6 +172,16 @@ body {
     align-items: center;
     text-align: center;
 }
+
+/* background color linear*/
+.cardDiv {
+    background-image: linear-gradient(bottom, #161616 35%, #303030 15%, #303030 50%);
+    background-image: -o-linear-gradient(bottom, #161616 35%, #303030 15%, #303030 50%);
+    background-image: -moz-linear-gradient(bottom, #161616 35%, #303030 15%, #303030 50%);
+    background-image: -webkit-linear-gradient(bottom, #161616 35%, #303030 15%, #303030 50%);
+    background-image: -ms-linear-gradient(bottom, #161616 35%, #303030 15%, #303030 50%);
+}
+
 
 /* card button */
 .cardRead {
@@ -185,6 +202,7 @@ body {
     justify-content: center;
     align-items: center;
     min-width: 150px;
+    margin-bottom: 10px;
     background-color: rgb(255, 17, 17);
     border: 1px solid rgb(255, 17, 17);
     border-radius: 15px;
