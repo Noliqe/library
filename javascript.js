@@ -10,7 +10,8 @@ function handleClick(cb) {
 
 let myLibrary = [];
 class Book {
-    constructor(author, title, pages, read){
+
+    constructor(author, title, pages, read) {
     this.author = author;
     this.title = title;
     this.pages = pages;
@@ -33,7 +34,7 @@ function addBookToLibrary() {
 }
 
 function submitForm(event){
-    event.preventDefault();
+    // event.preventDefault();
 }
 
 // clear form input
@@ -149,8 +150,24 @@ function addBook () {
     formAuthor.setAttribute("type", "text");
     formAuthor.setAttribute("id", "author");
     formAuthor.setAttribute("name", "author");
+    formAuthor.setAttribute("required", "required");
+    formAuthor.setAttribute("pattern", "[A-Za-z]+");
+    // formAuthor.setAttribute("minlength", "2");
+    // formAuthor.setAttribute("maxlength", "5");
     formAuthor.setAttribute("placeholder", "Author");
     formAuthor.classList.add('popupInput');
+    formAuthor.addEventListener('input', () => {
+        formAuthor.setCustomValidity('');
+        formAuthor.checkValidity();
+    });
+    
+    formAuthor.addEventListener('invalid', () => {
+        if (formAuthor.value === '') {
+            formAuthor.setCustomValidity('Enter the name of the Author!');
+          } else {
+            formAuthor.setCustomValidity('Usernames can only contain upper and lowercase letters. Try again!');
+          }
+    })
 
     // title
     let formTitle = document.createElement('input');
@@ -159,8 +176,19 @@ function addBook () {
     formTitle.setAttribute("type", "text");
     formTitle.setAttribute("id", "title");
     formTitle.setAttribute("name", "title");
+    formTitle.setAttribute("required", "required");
     formTitle.setAttribute("placeholder", "Title");
     formTitle.classList.add('popupInput');
+    formTitle.addEventListener('input', () => {
+        formTitle.setCustomValidity('');
+        formTitle.checkValidity();
+    });
+    
+    formTitle.addEventListener('invalid', () => {
+        if (formTitle.value === '') {
+            formTitle.setCustomValidity('Please enter the title of the book!');
+        }
+    })
 
 
     // pages
@@ -171,6 +199,7 @@ function addBook () {
     formPages.setAttribute("id", "pages");
     formPages.setAttribute("name", "pages");
     formPages.setAttribute('pattern', '[0-9];');
+    formPages.setAttribute("required", "required");
     formPages.setAttribute("placeholder", "Pages");
     formPages.classList.add('popupInput');
 
@@ -203,7 +232,15 @@ function addBook () {
     formButton.setAttribute("id", "formSubmit");
     formButton.setAttribute("name", "formSubmit");
     formButton.classList.add('popupButton');
-    formButton.setAttribute("onclick", "addBookToLibrary(); submitForm(event); clearForm();");
+    formButton.addEventListener('click', () => {
+        if (form.checkValidity() === true) {
+        onclick;
+        addBookToLibrary(); 
+        submitForm(event); 
+        clearForm();
+        }
+    })
+    
 
 
 
